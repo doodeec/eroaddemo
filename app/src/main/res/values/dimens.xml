@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--padding-->
+    <dimen name="xxbig_padding">32dp</dimen>
+    <dimen name="xbig_padding">24dp</dimen>
+    <dimen name="big_padding">16dp</dimen>
+    <dimen name="middle_padding">12dp</dimen>
+    <dimen name="padding">8dp</dimen>
+    <dimen name="small_padding">4dp</dimen>
+    <dimen name="xsmall_padding">2dp</dimen>
+
+    <!--text size-->
+    <dimen name="text_display2">45sp</dimen>
+    <dimen name="text_display1">34sp</dimen>
+    <dimen name="text_headline">24sp</dimen>
+    <dimen name="text_title">20sp</dimen>
+    <dimen name="text_subhead">16sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_caption">12sp</dimen>
+</resources>

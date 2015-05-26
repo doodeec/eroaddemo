@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Fonts-->
+    <color name="fontColorDark">#333</color>
+    <color name="fontColorDefault">#555</color>
+    <color name="fontColorLight">#999</color>
+    <color name="fontColorXLight">#aaa</color>
+
+    <!--Material theme-->
+    <color name="primary_color">#1a76bd</color>
+    <color name="primary_dark_color">#125189</color>
+    <color name="accent_color">#E91E63</color>
+
+    <color name="separator">#eee</color>
+</resources>

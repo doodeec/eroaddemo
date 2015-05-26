@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">EROADdemo</string>
+
+    <string name="location">Your location</string>
+    <string name="latitude">Latitude:</string>
+    <string name="longitude">Longitude:</string>
+
+    <string name="utc_time">UTC time:</string>
+    <string name="local_time">Local time:</string>
+    <string name="timezone">Timezone:</string>
+</resources>

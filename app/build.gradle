@@ -1,0 +1,85 @@
+final VERSION_MAJOR = 1 // max two digits
+final VERSION_MINOR = 0 // max two digits
+final VERSION_PATCH = 0 // max two digits
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.doodeec.eroaddemo"
+        minSdkVersion 14
+        targetSdkVersion 22
+        versionCode VERSION_MAJOR * 10000 + VERSION_MINOR * 100 + VERSION_PATCH
+        versionName "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
+    }
+
+    signingConfigs {
+        release {
+            // passwords and alias are obtained via askForPasswords task
+            storeFile file("../${project.property('keystore.file')}")
+            storePassword ""
+            keyAlias ""
+            keyPassword ""
+        }
+    }
+
+    buildTypes {
+        debug {
+            versionNameSuffix "-debug"
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+task askForPasswords << {
+    def storePass
+    def keyAlias
+    def keyPass
+
+    def keystorePropertiesFile = new File(project.property("keystore.properties"))
+
+    if (project.hasProperty("keystore.properties") && keystorePropertiesFile.exists()) {
+        println "Loading keystore passwords from property file..."
+        Properties properties = new Properties()
+        properties.load(new FileInputStream(keystorePropertiesFile))
+        storePass = properties['keystore.store.password']
+        keyAlias = properties['keystore.key.alias']
+        keyPass = properties['keystore.key.password']
+    } else {
+        println "Getting keystore passwords from user input..."
+        storePass = new String(System.console().readPassword("\nStore password: "))
+        keyAlias = new String(System.console().readLine("Key alias: "))
+        keyPass = new String(System.console().readPassword("Key password: "))
+    }
+
+    android.signingConfigs.release.storePassword = storePass
+    android.signingConfigs.release.keyAlias = keyAlias
+    android.signingConfigs.release.keyPassword = keyPass
+}
+
+
+tasks.whenTaskAdded {
+    theTask ->
+        if (theTask.name.equals("packageRelease")) {
+            theTask.dependsOn "askForPasswords"
+        }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.google.android.gms:play-services:7.3.0'
+    compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp:2.4.0-RC1'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0-RC1'
+}
