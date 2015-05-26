@@ -240,6 +240,7 @@ public class LocationActivity extends Activity implements
 
     @Override
     public void onLocationChanged(Location location) {
+        ERLog.i("Location loaded", location.toString());
         mCurrentLocation = location;
         if (mMapReadyFlag) {
             showLocation();
@@ -293,9 +294,9 @@ public class LocationActivity extends Activity implements
 
         //send Timezone API request
         String location = String.format(Locale.ENGLISH, "%.2f,%.2f", mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-        String apiKey = getString(R.string.gapi_key);
+        String apiKey = getString(R.string.timezone_api_key);
         if (location != null && apiKey != null) {
-            RestClient.get().getTimezone(location, apiKey, this);
+            RestClient.get().getTimezone(location, apiKey, System.currentTimeMillis() / 1000, this);
         }
     }
 

@@ -11,7 +11,8 @@ import retrofit.http.Query;
  */
 public interface RestService {
     @GET("/json")
-    void getTimezone(@Query("location") String location,
+    void getTimezone(@Query(value = "location", encodeValue = false) String location,
                      @Query("key") String key,
+                     @Query("timestamp") long timestamp,
                      Callback<TimezoneResponse> callback);
 }
